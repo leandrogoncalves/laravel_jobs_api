@@ -30,7 +30,7 @@ class LoginController extends Controller
                 ],
                 200,
                 [
-                    'Authoization' => 'Bearer ' . $user->createToken('token')->accessToken
+                    'Authorization' => 'Bearer ' . $user->createToken('token')->accessToken
                 ]
             );
         } catch (\Exception $e) {

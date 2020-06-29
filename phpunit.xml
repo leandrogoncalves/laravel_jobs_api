@@ -7,7 +7,9 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false">
+         stopOnFailure="false"
+         printerClass="Sempro\PHPUnitPrettyPrinter\PrettyPrinter"
+         >
     <testsuites>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
@@ -26,6 +28,7 @@
         <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
     </logging>
     <php>
+        <env name="PHPUNIT_PRETTY_PRINT_PROGRESS" value="true" />
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
