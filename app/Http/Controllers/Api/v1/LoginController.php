@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,19 +11,28 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
         try {
-            $credentials = request(['email', 'password']);
-            dd($credentials);
             if (!Auth::attempt($credentials)) {
                 throw new InvalidParameterException('Invalid credentials');
             }
 
             $user = $request->user();
-            return response()->json([
-                'name' => $user->name,
-                'email' => $user->email,
-                'token' => $user->createToken('token')->accessToken,
-            ]);
+
+            return response()->json(
+                [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ],
+                200,
+                [
+                    'Authoization' => 'Bearer ' . $user->createToken('token')->accessToken
+                ]
+            );
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

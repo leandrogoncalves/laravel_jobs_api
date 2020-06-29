@@ -1,11 +1,19 @@
 php:
   preset: laravel
+  risky: true
+  tab-width: 4
+  use-tabs: false
   disabled:
     - unused_use
   finder:
     not-name:
       - index.php
       - server.php
+    exclude:
+      - "modules"
+      - "node_modules"
+      - "storage"
+      - "vendor"
 js:
   finder:
     not-name:

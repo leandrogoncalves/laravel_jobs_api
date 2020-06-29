@@ -45,7 +45,8 @@ return [
 
         'api' => [
             'driver' => 'passport',
-            'provider' => User::class,
+            'provider' => 'users',
+            'hash' => false
         ],
     ],
 
